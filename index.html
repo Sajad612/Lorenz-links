@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <script>
+    var deepLink = "yourapp://product/123";
+    var storeURL = "https://play.google.com/store/apps/details?id=com.yourapp"; // Android URL
+    
+    window.location = deepLink;
+
+    setTimeout(function() {
+      window.location = storeURL;
+    }, 2000); // Delay before redirecting to the store
+  </script>
+</head>
+<body>
+  <p>If the app is not installed, you will be redirected to the store.</p>
+</body>
+</html>
