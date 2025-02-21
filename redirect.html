@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        function redirectToApp() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get("product");
+
+            if (productId) {
+                // فتح التطبيق مباشرة إذا كان مثبتًا
+                window.location.href = `yourapp://product/${productId}`;
+
+                // تأخير قصير قبل إعادة التوجيه إلى متجر التطبيقات
+                setTimeout(() => {
+                    window.location.href = "https://play.google.com/store/apps/details?id=com.yourapp";
+                }, 3000);
+            } else {
+                document.body.innerHTML = "<h1>Product Not Found</h1>";
+            }
+        }
+
+        redirectToApp();
+    </script>
+</head>
+<body>
+    <h2>جارٍ توجيهك إلى التطبيق...</h2>
+</body>
+</html>
