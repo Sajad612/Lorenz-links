@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting...</title>
-  <script>
-    var deepLink = "yourapp://product/123";
-    var storeURL = "https://play.google.com/store/apps/details?id=com.yourapp"; // Android URL
-    
-    window.location = deepLink;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        // استخراج معرف المنتج من الرابط
+        function getProductId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('product'); // الحصول على قيمة product
+        }
 
-    setTimeout(function() {
-      window.location = storeURL;
-    }, 2000); // Delay before redirecting to the store
-  </script>
+        var productId = getProductId(); // قراءة المنتج من الرابط
+
+        if (productId) {
+            var deepLink = "yourapp://product/" + productId; // توليد الرابط العميق
+            var storeURL = "https://play.google.com/store/apps/details?id=com.yourapp"; // رابط المتجر
+
+            // فتح التطبيق إذا كان مثبتًا
+            window.location = deepLink;
+
+            // إذا لم يكن التطبيق مثبتًا، بعد 2 ثانية سيتم فتح متجر التطبيقات
+            setTimeout(function () {
+                window.location = storeURL;
+            }, 2000);
+        } else {
+            document.write("<p>Invalid product link</p>");
+        }
+    </script>
 </head>
 <body>
-  <p>If the app is not installed, you will be redirected to the store.</p>
+    <p>If the app is not installed, you will be redirected to the store.</p>
 </body>
 </html>
